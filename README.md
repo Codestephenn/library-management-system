@@ -1,43 +1,97 @@
 # Library Management System
 
-A simple relational database system to manage books, authors, members, and loans for a small library.
+![badge](https://img.shields.io/badge/SQL-Relational%20Database-blue)
+![badge](https://img.shields.io/badge/MariaDB-Termux-lightgrey)
+![badge](https://img.shields.io/badge/Project-Complete-brightgreen)
 
-## Features
+A simple, fully functional relational database system to manage books, authors, members, and loans for a small library.
+
+> Built entirely in **MariaDB (Termux)** with real-world use cases, automation, permissions, and backup scripting.
+
+
+## 📚 Features
 
 - Track books, authors, and members
 - Record book loans and returns
-- Run meaningful queries (e.g., borrowed books, overdue loans)
-- Daily database backup script
-- Read-only user with `SELECT` permissions for auditing
+- Query books currently borrowed
+- Count member borrowing activity
+- Create read-only user for auditing
+- Daily automatic SQL backup script
+- Ready for backend/full-stack extension
 
-## Setup
 
-1. Import the database structure:
-   ```bash
-   mariadb -u root library < create_tables.sql
-   ```
+## 🧱 Database Structure
 
-2. Insert sample data:
-   ```bash
-   mariadb -u root library < insert_sample_data.sql
-   ```
+| Table     | Description                     |
+|-----------|---------------------------------|
+| `authors` | Stores author details           |
+| `books`   | Linked to authors               |
+| `members` | Library users                   |
+| `loans`   | Tracks borrow/return activity   |
 
-3. Run queries in `queries.sql` for testing.
+ERD Diagram included: `Library_ERD_Diagram.png`
 
-4. Use `backup_library.sh` to create timestamped backups.
 
-5. Use `cron_setup.txt` to schedule automated daily backups.
+## ⚙️ Setup Instructions
 
-## Files
+### Import Tables:
+```bash
+mariadb -u root library < create_tables.sql
 
-- `create_tables.sql`: Table definitions
-- `insert_sample_data.sql`: Test data
-- `queries.sql`: Useful SQL queries (`JOIN`s, counts, filters)
-- `backup_library.sh`: Bash backup script
-- `Library_ERD_Diagram.png`: ERD of the database
-- `Library_DB_Project_Report.pdf`: Final summary report
+Insert Sample Data:
 
-## Author
+mariadb -u root library < insert_sample_data.sql
 
-Stephen Toomey  
+Test with Queries:
+
+See queries.sql for JOINs and reports.
+
+
+
+🔒 Security
+
+A read-only user auditor@localhost is created for safe viewing access only:
+
+CREATE USER 'auditor'@'localhost' IDENTIFIED BY 'securepass';
+GRANT SELECT ON library.* TO 'auditor'@'localhost';
+
+
+
+♻️ Automation
+
+backup_library.sh creates a timestamped .sql backup
+
+cron_setup.txt runs the backup daily at 1AM
+
+
+
+
+📁 Files Included
+
+create_tables.sql — Full DB schema
+
+insert_sample_data.sql — Sample data
+
+queries.sql — Sample SELECT + JOIN statements
+
+backup_library.sh — Backup script
+
+cron_setup.txt — Daily cron schedule
+
+Library_DB_Project_Report.pdf — Summary report
+
+Library_ERD_Diagram.png — Entity-Relationship Diagram
+
+
+
+
+🧑‍💻 Author
+
+Stephen Toomey
 Full Stack Developer & Future DBA
+GitHub | LinkedIn
+
+
+
+> Proudly built with Termux, passion, and clean SQL.
+
