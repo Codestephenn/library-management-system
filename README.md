@@ -35,7 +35,7 @@ ERD Diagram included: `Library_ERD_Diagram.png`
 ## ⚙️ Setup Instructions
 
 ### Import Tables:
-```bash
+
 mariadb -u root library < create_tables.sql
 
 Insert Sample Data:
